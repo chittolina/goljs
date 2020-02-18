@@ -11,6 +11,11 @@
     "dev": "parcel ./src/index.html",
     "test": "jest"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
   "dependencies": {
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
@@ -20,8 +25,11 @@
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.8.4",
     "@babel/preset-react": "^7.8.3",
+    "husky": "^4.2.3",
     "jest": "^25.1.0",
     "parcel-bundler": "^1.12.4",
+    "prettier": "^1.19.1",
+    "pretty-quick": "^2.0.1",
     "react-test-renderer": "^16.12.0"
   }
 }
