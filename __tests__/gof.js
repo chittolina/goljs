@@ -1,4 +1,9 @@
-import { getNeighbors, getNewCellState, MAP_DIMENSIONS } from '../src/lib/gof'
+import {
+  getNeighbors,
+  getNewState,
+  getNewCellState,
+  MAP_DIMENSIONS,
+} from '../src/lib/gof'
 
 describe('Game of Life algorithms', () => {
   describe('getNeighbors', () => {
@@ -89,6 +94,8 @@ describe('Game of Life algorithms', () => {
         [51, 50],
         [51, 51],
         [51, 49],
+        [50, 49],
+        [50, 51],
       ]
       expect(getNeighbors([50, 50])).toEqual(expect.arrayContaining(neighbors))
     })
@@ -123,6 +130,27 @@ describe('Game of Life algorithms', () => {
       const neighbors = [1, 0, 0, 0, 0]
 
       expect(getNewCellState(currentState, neighbors)).toEqual(0)
+    })
+  })
+
+  describe('getNewState', () => {
+    it('should return a new state', () => {
+      const currentState = Array(MAP_DIMENSIONS[0])
+        .fill()
+        .map(() => Array(MAP_DIMENSIONS[1]).fill(0))
+      currentState[0][0] = 1
+      currentState[0][1] = 1
+      currentState[0][2] = 1
+
+      const expectedState = Array(MAP_DIMENSIONS[0])
+        .fill()
+        .map(() => Array(MAP_DIMENSIONS[1]).fill(0))
+      expectedState[0][0] = 0
+      expectedState[0][2] = 0
+
+      expect(getNewState(currentState)).toEqual(
+        expect.arrayContaining(expectedState),
+      )
     })
   })
 })
