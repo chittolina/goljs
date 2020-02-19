@@ -75,4 +75,16 @@ describe('getNeighbors', () => {
       expect.arrayContaining(bottomNeighbors),
     )
   })
+
+  describe('generic case', () => {
+    const neighbors = [
+      [49, 50],
+      [49, 51],
+      [49, 49],
+      [51, 50],
+      [51, 51],
+      [51, 49],
+    ]
+    expect(getNeighbors([50, 50])).toEqual(expect.arrayContaining(neighbors))
+  })
 })

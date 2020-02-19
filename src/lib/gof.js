@@ -72,7 +72,18 @@ const getNeighbors = ([x, y] = []) => {
       [x + 1, y],
     ]
   }
-  return []
+
+  // Generic case
+  return [
+    [x - 1, y],
+    [x - 1, y + 1],
+    [x - 1, y - 1],
+    [x + 1, y],
+    [x + 1, y + 1],
+    [x + 1, y - 1],
+    [x, y + 1],
+    [x, y - 1],
+  ]
 }
 
 export { getNeighbors, MAP_DIMENSIONS }
