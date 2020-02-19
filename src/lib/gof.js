@@ -86,4 +86,24 @@ const getNeighbors = ([x, y] = []) => {
   ]
 }
 
-export { getNeighbors, MAP_DIMENSIONS }
+const getNewCellState = (currentState, neighbors = []) => {
+  const livingCells = neighbors.filter(neighbor => neighbor === 1).length
+
+  let newState = currentState
+
+  if (currentState == 0 && livingCells === 3) {
+    newState = 1
+  }
+  if (currentState === 1) {
+    if (livingCells === 2 || livingCells === 3) {
+      newState = 1
+    }
+    if (livingCells < 2 || livingCells > 3) {
+      newState = 0
+    }
+  }
+
+  return newState
+}
+
+export { getNeighbors, getNewCellState, MAP_DIMENSIONS }
