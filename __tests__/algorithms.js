@@ -3,7 +3,6 @@ import {
   getNewState,
   getNewCellState,
   createBoard,
-  setMapDimensions,
 } from '../src/lib/algorithms'
 
 describe('Game of Life algorithms', () => {
