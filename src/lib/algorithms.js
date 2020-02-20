@@ -7,6 +7,7 @@
  * Gets the neighbors positions for the given x and y position
  * @param {number} x The x coordinate
  * @param {number} y The y coordinate
+ * @param {Array<Array<number>>} The current map
  * @return {Array<Array<number>>} An array with the found neighbors positions
  */
 const getNeighbors = (x, y, map) => {
