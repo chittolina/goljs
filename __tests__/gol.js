@@ -2,10 +2,13 @@ import {
   getNeighbors,
   getNewState,
   getNewCellState,
-  MAP_DIMENSIONS,
-} from '../src/lib/gof'
+  setMapDimensions,
+} from '../src/lib/gol'
 
 describe('Game of Life algorithms', () => {
+  const mapDimensions = [100, 100]
+  setMapDimensions(mapDimensions)
+
   describe('getNeighbors', () => {
     it('corner cases', () => {
       const neighborsLeftBottom = [
@@ -14,31 +17,31 @@ describe('Game of Life algorithms', () => {
         [1, 0],
       ]
       const neighborsLeftTop = [
-        [0, MAP_DIMENSIONS[1] - 1],
-        [1, MAP_DIMENSIONS[1] - 1],
-        [1, MAP_DIMENSIONS[1]],
+        [0, mapDimensions[1] - 1],
+        [1, mapDimensions[1] - 1],
+        [1, mapDimensions[1]],
       ]
       const neighborsRightBottom = [
-        [MAP_DIMENSIONS[0], 1],
-        [MAP_DIMENSIONS[0] - 1, 1],
-        [MAP_DIMENSIONS[0] - 1, 0],
+        [mapDimensions[0], 1],
+        [mapDimensions[0] - 1, 1],
+        [mapDimensions[0] - 1, 0],
       ]
       const neighborsRightTop = [
-        [MAP_DIMENSIONS[0] - 1, MAP_DIMENSIONS[1]],
-        [MAP_DIMENSIONS[0] - 1, MAP_DIMENSIONS[1] - 1],
-        [MAP_DIMENSIONS[0], MAP_DIMENSIONS[1] - 1],
+        [mapDimensions[0] - 1, mapDimensions[1]],
+        [mapDimensions[0] - 1, mapDimensions[1] - 1],
+        [mapDimensions[0], mapDimensions[1] - 1],
       ]
 
-      expect(getNeighbors([0, 0])).toEqual(
+      expect(getNeighbors(0, 0)).toEqual(
         expect.arrayContaining(neighborsLeftBottom),
       )
-      expect(getNeighbors([0, MAP_DIMENSIONS[1]])).toEqual(
+      expect(getNeighbors(0, mapDimensions[1])).toEqual(
         expect.arrayContaining(neighborsLeftTop),
       )
-      expect(getNeighbors([MAP_DIMENSIONS[0], 0])).toEqual(
+      expect(getNeighbors(mapDimensions[0], 0)).toEqual(
         expect.arrayContaining(neighborsRightBottom),
       )
-      expect(getNeighbors([MAP_DIMENSIONS[0], MAP_DIMENSIONS[1]])).toEqual(
+      expect(getNeighbors(mapDimensions[0], mapDimensions[1])).toEqual(
         expect.arrayContaining(neighborsRightTop),
       )
     })
@@ -72,16 +75,12 @@ describe('Game of Life algorithms', () => {
         [3, 1],
         [3, 0],
       ]
-      expect(getNeighbors([0, 2])).toEqual(
-        expect.arrayContaining(leftNeighbors),
-      )
-      expect(getNeighbors([99, 1])).toEqual(
+      expect(getNeighbors(0, 2)).toEqual(expect.arrayContaining(leftNeighbors))
+      expect(getNeighbors(99, 1)).toEqual(
         expect.arrayContaining(rightNeighbors),
       )
-      expect(getNeighbors([1, 99])).toEqual(
-        expect.arrayContaining(topNeighbors),
-      )
-      expect(getNeighbors([2, 0])).toEqual(
+      expect(getNeighbors(1, 99)).toEqual(expect.arrayContaining(topNeighbors))
+      expect(getNeighbors(2, 0)).toEqual(
         expect.arrayContaining(bottomNeighbors),
       )
     })
@@ -97,7 +96,7 @@ describe('Game of Life algorithms', () => {
         [50, 49],
         [50, 51],
       ]
-      expect(getNeighbors([50, 50])).toEqual(expect.arrayContaining(neighbors))
+      expect(getNeighbors(50, 50)).toEqual(expect.arrayContaining(neighbors))
     })
   })
 
@@ -135,16 +134,16 @@ describe('Game of Life algorithms', () => {
 
   describe('getNewState', () => {
     it('should return a new state', () => {
-      const currentState = Array(MAP_DIMENSIONS[0])
+      const currentState = Array(mapDimensions[0])
         .fill()
-        .map(() => Array(MAP_DIMENSIONS[1]).fill(0))
+        .map(() => Array(mapDimensions[1]).fill(0))
       currentState[0][0] = 1
       currentState[0][1] = 1
       currentState[0][2] = 1
 
-      const expectedState = Array(MAP_DIMENSIONS[0])
+      const expectedState = Array(mapDimensions[0])
         .fill()
-        .map(() => Array(MAP_DIMENSIONS[1]).fill(0))
+        .map(() => Array(mapDimensions[1]).fill(0))
       expectedState[0][0] = 0
       expectedState[0][2] = 0
 
