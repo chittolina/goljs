@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const pauseButton = document.getElementById('pause')
   const clearButton = document.getElementById('clear')
   const randomButton = document.getElementById('random')
+  const intervalSlider = document.getElementById('interval')
 
   const gameOfLife = new GameOfLife({
     dimensions: [100, 100],
@@ -16,4 +17,5 @@ document.addEventListener('DOMContentLoaded', () => {
   pauseButton.addEventListener('click', gameOfLife.pause)
   clearButton.addEventListener('click', gameOfLife.clear)
   randomButton.addEventListener('click', gameOfLife.random)
+  intervalSlider.addEventListener('input', gameOfLife.changeInterval)
 })

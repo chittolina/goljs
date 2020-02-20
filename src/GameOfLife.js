@@ -70,6 +70,20 @@ export default class GameOfLife {
   }
 
   /**
+   * Changes the current tick interval
+   * @param {Event} event The input event received by the slider
+   */
+  changeInterval = event => {
+    const {
+      target: { value: interval },
+    } = event
+    this.interval = interval
+
+    this.pause()
+    this.start()
+  }
+
+  /**
    * Generates a random pattern on the map
    */
   random = () => {
@@ -115,7 +129,7 @@ export default class GameOfLife {
       }
     }
 
-    document.getElementById('generation').innerHTML = currentGeneration
+    document.getElementById('generation-count').innerHTML = currentGeneration
   }
 
   /**

@@ -25,6 +25,10 @@
       margin-bottom: 10px;
     }
 
+    #interval {
+      vertical-align: middle;
+    }
+
     button {
       border: none;
       padding: 10px;
@@ -38,10 +42,11 @@
         <button id="pause">Pause</button>
         <button id="clear">Clear</button>
         <button id="random">Random pattern</button>
+        <input id="interval" type="range" min="10" max="1000" value="100" />
       </div>
       <div class="generation">
         <span>Generation: </span>
-        <span id="generation">0</span>
+        <span id="generation-count">0</span>
       </div>
       <div id="board"></div>
     </div>
