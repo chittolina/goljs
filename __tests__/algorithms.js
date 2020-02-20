@@ -6,47 +6,50 @@ import {
 } from '../src/lib/algorithms'
 
 describe('Game of Life algorithms', () => {
-  const mapDimensions = [10, 10]
-  const board = createBoard({ dimensions: mapDimensions })
-
   describe('getNeighbors', () => {
     it('corner cases', () => {
+      const dimensions = [10, 10]
+      const board = createBoard({ dimensions })
+
       const neighborsLeftBottom = [
         [0, 1],
         [1, 1],
         [1, 0],
       ]
       const neighborsLeftTop = [
-        [0, mapDimensions[1] - 1],
-        [1, mapDimensions[1] - 1],
-        [1, mapDimensions[1]],
+        [0, dimensions[1] - 1],
+        [1, dimensions[1] - 1],
+        [1, dimensions[1]],
       ]
       const neighborsRightBottom = [
-        [mapDimensions[0], 1],
-        [mapDimensions[0] - 1, 1],
-        [mapDimensions[0] - 1, 0],
+        [dimensions[0], 1],
+        [dimensions[0] - 1, 1],
+        [dimensions[0] - 1, 0],
       ]
       const neighborsRightTop = [
-        [mapDimensions[0] - 1, mapDimensions[1]],
-        [mapDimensions[0] - 1, mapDimensions[1] - 1],
-        [mapDimensions[0], mapDimensions[1] - 1],
+        [dimensions[0] - 1, dimensions[1]],
+        [dimensions[0] - 1, dimensions[1] - 1],
+        [dimensions[0], dimensions[1] - 1],
       ]
 
       expect(getNeighbors(0, 0, board)).toEqual(
         expect.arrayContaining(neighborsLeftBottom),
       )
-      expect(getNeighbors(0, mapDimensions[1], board)).toEqual(
+      expect(getNeighbors(0, dimensions[1], board)).toEqual(
         expect.arrayContaining(neighborsLeftTop),
       )
-      expect(getNeighbors(mapDimensions[0], 0, board)).toEqual(
+      expect(getNeighbors(dimensions[0], 0, board)).toEqual(
         expect.arrayContaining(neighborsRightBottom),
       )
-      expect(getNeighbors(mapDimensions[0], mapDimensions[1], board)).toEqual(
+      expect(getNeighbors(dimensions[0], dimensions[1], board)).toEqual(
         expect.arrayContaining(neighborsRightTop),
       )
     })
 
     it('extreme left, right, top and bottom', () => {
+      const dimensions = [10, 10]
+      const board = createBoard({ dimensions })
+
       const leftNeighbors = [
         [0, 1],
         [1, 1],
@@ -90,6 +93,9 @@ describe('Game of Life algorithms', () => {
     })
 
     it('generic case', () => {
+      const dimensions = [10, 10]
+      const board = createBoard({ dimensions })
+
       const neighbors = [
         [49, 50],
         [49, 51],
@@ -108,7 +114,9 @@ describe('Game of Life algorithms', () => {
 
   describe('getNewCellState', () => {
     it('switches from dead to alive it surrounded by 3 living cells', () => {
-      const board = createBoard({ dimensions: mapDimensions })
+      const dimensions = [10, 10]
+      const board = createBoard({ dimensions })
+
       board[1][0] = 1
       board[2][0] = 0
       board[3][0] = 1
@@ -118,7 +126,8 @@ describe('Game of Life algorithms', () => {
     })
 
     it('remains alive if surrounded by 2 or 3 living cells', () => {
-      const board = createBoard({ dimensions: [10, 10] })
+      const dimensions = [10, 10]
+      const board = createBoard({ dimensions })
       board[0][0] = 1
       board[0][1] = 1
       board[1][0] = 1
@@ -133,7 +142,8 @@ describe('Game of Life algorithms', () => {
     })
 
     it('switches from alive to dead if surrounded by more than 3 living cells due overpopulation', () => {
-      const board = createBoard({ dimensions: [10, 10] })
+      const dimensions = [10, 10]
+      const board = createBoard({ dimensions })
       board[2][0] = 1
       board[3][0] = 1
       board[4][0] = 1
@@ -144,7 +154,8 @@ describe('Game of Life algorithms', () => {
     })
 
     it('switches from alive to dead if surrounded by less than 2 living cells due underpopulation', () => {
-      const board = createBoard({ dimensions: [10, 10] })
+      const dimensions = [10, 10]
+      const board = createBoard({ dimensions })
       board[2][0] = 1
       board[3][0] = 1
 
@@ -155,12 +166,13 @@ describe('Game of Life algorithms', () => {
 
   describe('getNewState', () => {
     it('returns a new state', () => {
-      const currentState = createBoard({ dimensions: [10, 10] })
+      const dimensions = [10, 10]
+      const currentState = createBoard({ dimensions })
       currentState[0][0] = 1
       currentState[0][1] = 1
       currentState[0][2] = 1
 
-      const expectedState = createBoard({ dimensions: [10, 10] })
+      const expectedState = createBoard({ dimensions })
       expectedState[0][0] = 0
       expectedState[0][2] = 0
 
