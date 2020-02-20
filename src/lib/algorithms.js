@@ -1,6 +1,6 @@
 /**
- *  Game of Life module. Contains algorithms used to implement the game created by John Horton Conway.
- * @module src/lib/gol
+ *  Algorithms module. Contains algorithms used to implement the game created by John Horton Conway.
+ * @module src/lib/algorithms
  */
 
 /** @const {Array<number>} */
@@ -156,12 +156,11 @@ const getNewState = currentMapState => {
 }
 
 /**
- * Creates a new board
- * @param {Array<Array<number>>} currentMapState The current map state
- * @param {boolean} random Whether to generate random values or not
- * @return {Array<Array<number>>} The new map state
+ * Sets the dimensions used on the algorithms
+ * @param {number} x The x coordinate
+ * @param {number} y The y coordinate
  */
-const setMapDimensions = ([x, y] = []) => {
+const setMapDimensions = (x, y) => {
   mapDimensions = [x, y]
   mapConstraints = [mapDimensions[0] - 1, mapDimensions[1] - 1]
 }
@@ -172,7 +171,7 @@ const setMapDimensions = ([x, y] = []) => {
  * @param {boolean} random Whether to generate random values or not
  * @return {Array<Array<number>>} The new map state
  */
-const createBoard = ([x, y] = [], random = false) => {
+const createBoard = ({ dimensions: [x, y] = [], random = false }) => {
   let board = []
 
   for (let i = 0; i < x; i++) {

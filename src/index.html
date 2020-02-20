@@ -7,21 +7,44 @@
     <title>Gofjs</title>
   </head>
   <style>
-    #board {
-      border: 1px solid black;
+    @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+    * {
+      font-family: Lato;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    .actions {
+      margin-bottom: 10px;
+    }
+
+    .generation {
+      margin-bottom: 10px;
+    }
+
+    button {
+      border: none;
+      padding: 10px;
     }
   </style>
-  <body>
-    <div>
-      <button id="start">Start</button>
-      <button id="pause">Pause</button>
-      <button id="stop">Stop</button>
-      <button id="random">Random pattern</button>
-      <span>Generation: </span>
-      <span id="generation">0</span>
-    </div>
 
-    <canvas id="board"></canvas>
+  <body>
+    <div class="container">
+      <div class="actions">
+        <button id="start">Start</button>
+        <button id="pause">Pause</button>
+        <button id="clear">Clear</button>
+        <button id="random">Random pattern</button>
+      </div>
+      <div class="generation">
+        <span>Generation: </span>
+        <span id="generation">0</span>
+      </div>
+      <div id="board"></div>
+    </div>
     <script src="./index.js"></script>
   </body>
 </html>

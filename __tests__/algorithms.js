@@ -2,12 +2,13 @@ import {
   getNeighbors,
   getNewState,
   getNewCellState,
+  createBoard,
   setMapDimensions,
-} from '../src/lib/gol'
+} from '../src/lib/algorithms'
 
 describe('Game of Life algorithms', () => {
   const mapDimensions = [100, 100]
-  setMapDimensions(mapDimensions)
+  setMapDimensions(mapDimensions[0], mapDimensions[1])
 
   describe('getNeighbors', () => {
     it('corner cases', () => {
@@ -150,6 +151,18 @@ describe('Game of Life algorithms', () => {
       expect(getNewState(currentState)).toEqual(
         expect.arrayContaining(expectedState),
       )
+    })
+  })
+
+  describe('createBoard', () => {
+    it('creates a board', () => {
+      const dimensions = [10, 10]
+      const board = createBoard({ dimensions, random: false })
+      for (let i = 0; i < board.length; i++) {
+        for (let j = 0; j < board[0].length; j++) {
+          expect(board[i][j]).toEqual(0)
+        }
+      }
     })
   })
 })

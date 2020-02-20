@@ -1,32 +1,43 @@
-import { createBoard, getNewState, setMapDimensions } from './lib/gol'
+import { createBoard, getNewState, setMapDimensions } from './lib/algorithms'
 
 export default class GameOfLife {
   /**
-   * Creates a new GameOfLife
+   * Creates a new board of GameOfLife
    * @param {Object} params Parameters object
    * @param {Array<Array>} params.dimensions The map dimensions
    * @param {number} params.interval The interval between generations
+   * @param {string} params.element The query selector of the element to use as a container for the board
    */
-  constructor({ dimensions, interval }) {
+  constructor({ dimensions, interval, element }) {
     this.dimensions = dimensions
     this.interval = interval
-    this.running = false
     this.timer = null
-    this.currentState = createBoard([dimensions[0], dimensions[1]])
+
+    this.running = false
+    this.currentState = createBoard({
+      dimensions: [dimensions[0], dimensions[1]],
+    })
     this.currentGeneration = 0
 
-    this.canvas = document.getElementById('board')
+    this.container = document.querySelector(element)
+    this.canvas = document.createElement('canvas')
+    this.container.appendChild(this.canvas)
     this.canvasWidth = 1000
     this.canvasHeight = 1000
+
     // Factors used to scale the given dimensions to the canvas size
     this.xFactor = this.canvasWidth / dimensions[0]
     this.yFactor = this.canvasHeight / dimensions[1]
+
     this.canvas.width = this.canvasWidth
     this.canvas.height = this.canvasHeight
 
     this.canvas.addEventListener('click', this.onCellClick)
 
-    setMapDimensions(dimensions)
+    setMapDimensions(dimensions[0], dimensions[1])
+
+    this.random()
+    this.updateBoard()
   }
 
   /**
@@ -49,11 +60,13 @@ export default class GameOfLife {
   }
 
   /**
-   * Stops the game (and clears the map)
+   * Pauses the game and clears the map
    */
-  stop = () => {
+  clear = () => {
     this.pause()
-    this.currentState = createBoard([this.dimensions[0], this.dimensions[1]])
+    this.currentState = createBoard({
+      dimensions: [this.dimensions[0], this.dimensions[1]],
+    })
     this.currentGeneration = 0
     this.updateBoard()
   }
@@ -62,11 +75,11 @@ export default class GameOfLife {
    * Generates a random pattern on the map
    */
   random = () => {
-    this.stop()
-    this.currentState = createBoard(
-      [this.dimensions[0], this.dimensions[1]],
-      true,
-    )
+    this.clear()
+    this.currentState = createBoard({
+      dimensions: [this.dimensions[0], this.dimensions[1]],
+      random: true,
+    })
     this.currentGeneration = 0
     this.updateBoard()
   }
@@ -83,7 +96,7 @@ export default class GameOfLife {
   }
 
   /**
-   * Updates the board accordingly to current state
+   * Updates the board accordingly to the current state
    */
   updateBoard = () => {
     const ctx = this.canvas.getContext('2d')
@@ -93,10 +106,10 @@ export default class GameOfLife {
     for (let i = 0; i < currentState.length; i++) {
       for (let j = 0; j < currentState[0].length; j++) {
         if (currentState[i][j] === 1) {
-          ctx.fillStyle = '#000'
+          ctx.fillStyle = '#581845'
           ctx.fillRect(i * xFactor, j * yFactor, xFactor, yFactor)
         } else {
-          ctx.fillStyle = '#999'
+          ctx.fillStyle = '#900C3F'
           ctx.fillRect(i * xFactor, j * yFactor, xFactor, yFactor)
         }
       }
