@@ -13,7 +13,7 @@
     "test": "jest",
     "docs": "jsdoc src/lib/*.js src/*.js  -d docs",
     "start": "yarn build && http-server dist",
-    "predeploy": "yarn build",
+    "predeploy": "yarn build --public-url /goljs/",
     "deploy": "gh-pages -d dist"
   },
   "husky": {
