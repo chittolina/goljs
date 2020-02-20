@@ -5,4 +5,4 @@ parcelRequire=function(e,r,t,n){var i,o="function"==typeof parcelRequire&&parcel
 },{"./lib/algorithms":"y463"}],"Focm":[function(require,module,exports) {
 "use strict";var e=t(require("./GameOfLife"));function t(e){return e&&e.__esModule?e:{default:e}}document.addEventListener("DOMContentLoaded",function(){var t=document.getElementById("start"),n=document.getElementById("pause"),d=document.getElementById("clear"),a=document.getElementById("random"),r=document.getElementById("interval"),c=new e.default({dimensions:[100,100],interval:10,element:"#board"});t.addEventListener("click",c.start),n.addEventListener("click",c.pause),d.addEventListener("click",c.clear),a.addEventListener("click",c.random),r.addEventListener("input",c.changeInterval)});
 },{"./GameOfLife":"RPSK"}]},{},["Focm"], null)
-//# sourceMappingURL=/goljs/src.d95b9f4c.js.map
+//# sourceMappingURL=/goljs/src.983c4014.js.map
