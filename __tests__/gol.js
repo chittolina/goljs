@@ -85,7 +85,7 @@ describe('Game of Life algorithms', () => {
       )
     })
 
-    describe('generic case', () => {
+    it('generic case', () => {
       const neighbors = [
         [49, 50],
         [49, 51],
