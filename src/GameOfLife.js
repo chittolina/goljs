@@ -79,8 +79,10 @@ export default class GameOfLife {
     } = event
     this.interval = interval
 
-    this.pause()
-    this.start()
+    if (this.running) {
+      this.pause()
+      this.start()
+    }
   }
 
   /**
