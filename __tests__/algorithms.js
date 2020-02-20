@@ -155,7 +155,7 @@ describe('Game of Life algorithms', () => {
   })
 
   describe('getNewState', () => {
-    it('should return a new state', () => {
+    it('returns a new state', () => {
       const currentState = createBoard({ dimensions: [10, 10] })
       currentState[0][0] = 1
       currentState[0][1] = 1
