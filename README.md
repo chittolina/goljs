@@ -10,7 +10,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Prerequisites
 
-In order to correctly use the application please make sure you have these three
+In order to correctly use the application please make sure you have these packages
 working fine before we can get started:
 
 - [Node.js 10+](https://nodejs.org/en/download/)
