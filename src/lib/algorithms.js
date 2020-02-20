@@ -3,19 +3,14 @@
  * @module src/lib/algorithms
  */
 
-/** @const {Array<number>} */
-let mapDimensions = []
-
-/** @const {Array<number>} */
-let mapConstraints = []
-
 /**
- * Gets the neighbors for the given x and y position
+ * Gets the neighbors positions for the given x and y position
  * @param {number} x The x coordinate
  * @param {number} y The y coordinate
  * @return {Array<Array<number>>} An array with the found neighbors positions
  */
-const getNeighbors = (x, y) => {
+const getNeighbors = (x, y, map) => {
+  const mapConstraints = [map[0].length - 1, map[1].length - 1]
   // 1. Corner cases
   // 1.1 Bottom left corner
   if (x == 0 && y == 0) {
@@ -107,12 +102,17 @@ const getNeighbors = (x, y) => {
 
 /**
  * Gets the new cell state
- * @param {number} currentState The current cell state. "0" for dead and "1" for alive
- * @param {Array<number>} neighbors An array with the current neighbors states
+ * @param {number} cellPosition The cell position
+ * @param {Array<number>} currentMapState An array with the current map state
  * @return {number} The new cell state.
  */
-const getNewCellState = (currentState, neighbors = []) => {
+const getNewCellState = ([x, y] = [], currentMapState) => {
+  const neighbors = getNeighbors(x, y, currentMapState).map(
+    ([i, j]) => currentMapState[i][j],
+  )
+
   const nearbyLivingCells = neighbors.filter(neighbor => neighbor === 1).length
+  let currentState = currentMapState[x][y]
   let newState = currentState
 
   if (currentState == 0 && nearbyLivingCells === 3) {
@@ -136,33 +136,19 @@ const getNewCellState = (currentState, neighbors = []) => {
  * @return {Array<Array<number>>} The new map state
  */
 const getNewState = currentMapState => {
-  const newState = Array(mapDimensions[0])
-    .fill()
-    .map(() => Array(mapDimensions[1]).fill(0))
+  const newState = createBoard({
+    dimensions: [currentMapState.length, currentMapState[0].length],
+  })
 
   for (let i = 0; i < newState.length; i++) {
     for (let j = 0; j < newState[0].length; j++) {
-      const neighbors = getNeighbors(i, j).map(
-        ([x, y]) => currentMapState[x][y],
-      )
-      const currentCellState = currentMapState[i][j]
-      const newCellState = getNewCellState(currentCellState, neighbors)
+      const newCellState = getNewCellState([i, j], currentMapState)
 
       newState[i][j] = newCellState
     }
   }
 
   return newState
-}
-
-/**
- * Sets the dimensions used on the algorithms
- * @param {number} x The x coordinate
- * @param {number} y The y coordinate
- */
-const setMapDimensions = (x, y) => {
-  mapDimensions = [x, y]
-  mapConstraints = [mapDimensions[0] - 1, mapDimensions[1] - 1]
 }
 
 /**
@@ -185,10 +171,4 @@ const createBoard = ({ dimensions: [x, y] = [], random = false }) => {
   return board
 }
 
-export {
-  createBoard,
-  getNeighbors,
-  getNewState,
-  getNewCellState,
-  setMapDimensions,
-}
+export { createBoard, getNeighbors, getNewState, getNewCellState }

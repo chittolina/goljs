@@ -1,4 +1,4 @@
-import { createBoard, getNewState, setMapDimensions } from './lib/algorithms'
+import { createBoard, getNewState } from './lib/algorithms'
 
 export default class GameOfLife {
   /**
@@ -33,8 +33,6 @@ export default class GameOfLife {
     this.canvas.height = this.canvasHeight
 
     this.canvas.addEventListener('click', this.onCellClick)
-
-    setMapDimensions(dimensions[0], dimensions[1])
 
     this.random()
     this.updateBoard()
@@ -106,9 +104,11 @@ export default class GameOfLife {
     for (let i = 0; i < currentState.length; i++) {
       for (let j = 0; j < currentState[0].length; j++) {
         if (currentState[i][j] === 1) {
+          // If cell is alive
           ctx.fillStyle = '#581845'
           ctx.fillRect(i * xFactor, j * yFactor, xFactor, yFactor)
         } else {
+          // If cell is dead
           ctx.fillStyle = '#900C3F'
           ctx.fillRect(i * xFactor, j * yFactor, xFactor, yFactor)
         }
@@ -133,6 +133,7 @@ export default class GameOfLife {
     const x = event.clientX - rect.left
     const y = event.clientY - rect.top
 
+    // Map the received values to our original map size
     const scaledX = Math.floor(x / this.xFactor)
     const scaledY = Math.floor(y / this.yFactor)
 
