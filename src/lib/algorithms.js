@@ -155,7 +155,7 @@ const getNewState = currentMapState => {
 /**
  * Creates a new board
  * @param {Object} params The params object
- * @param {Array<number>} [params.dimensions=[]]
+ * @param {Array<number>} [params.dimensions=[]] The desired x and y dimensions
  * @param {boolean} [params.random=false] Whether to generate random values or not
  * @return {Array<Array<number>>} The created board
  */
