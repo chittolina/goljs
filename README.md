@@ -54,6 +54,14 @@ yarn deploy
 
 This command will use github pages to deploy it. The only requirement is that you manually change the `predeploy` script and set a custom `--public-url` in case your repository name is other than `goljs`.
 
+
+## Generating docs
+
+```
+yarn docs
+```
+
+This will output the docs under the `/docs` folder.
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
